@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Create User
+{% endblock %}
+
+{% block content %}
+<h2>Login a User</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    <!-- Display Errors -->
+    {% for field, errors in form.errors.items() %}
+    <div class="alert alert-danger">
+        {{ field }}:
+        {% for error in errors %}
+        {{ error }}
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    <!-- Render Form Fields -->
+    {% for field in form if field.widget.input_type != 'hidden' %}
+    <div class="form-group row">
+        {{ field.label(class="col-sm-2 col-form-label") }}
+        <div class="col-sm-10">
+            {{ field(class="form-control") }}
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Login!</button>
+</form>
+{% endblock %}
